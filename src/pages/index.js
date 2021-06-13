@@ -8,7 +8,7 @@ import GlitchText from 'helpers/glitch';
 export default function Home() {
   // Ref
   const updateTimeout = useRef(30);
-  const globalCounter = useRef(0);
+  const globalCounter = useRef(-1);
   // State
   const [currentTime, setCurrentTime] = useState(moment().format('h:mm a'));
   const [currentSecond, setCurrentSecond] = useState(moment().format('ss'));
@@ -40,7 +40,6 @@ export default function Home() {
     const updateAlarms = () => {
       console.log('we are updating the alarms');
       const glitchArr = GlitchText.split('');
-      console.log('what is our alarm times...', alarm.times);
       let timesArr = alarmTimesRef.current.slice(1, alarmTimesRef.current.length);
       let str = '';
       for (let j = 0; j < 40; j++) {
@@ -53,6 +52,7 @@ export default function Home() {
       });
     }
     setInterval(() => {
+      globalCounter.current = (globalCounter.current + 1) % updateTimeout.current;
       if (globalCounter.current === 0) {
         if (counter === 0) {
           createAlarms();
@@ -67,7 +67,6 @@ export default function Home() {
         alarmSound = null;
         counter++;
       }
-      globalCounter.current = (globalCounter.current + 1) % updateTimeout.current;
     }, 1000);
   }
 
