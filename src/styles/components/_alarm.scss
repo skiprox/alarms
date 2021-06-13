@@ -2,6 +2,9 @@
   &.on {
     animation: bgChange 300ms linear infinite;
   }
+  &__time {
+    letter-spacing: -8px;
+  }
   &__switch {
     position: relative;
     appearance: none; outline: none;

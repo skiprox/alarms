@@ -1,40 +1,86 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import Head from 'next/head';
 import Alarms from 'components/Alarms';
+import Sound from 'components/Sound';
+import GlitchText from 'helpers/glitch';
 
 export default function Home() {
+  // Ref
+  const updateTimeout = useRef(30);
+  const globalCounter = useRef(0);
   // State
   const [currentTime, setCurrentTime] = useState(moment().format('h:mm a'));
   const [currentSecond, setCurrentSecond] = useState(moment().format('ss'));
   const [alarm, setAlarm] = useState({times: []});
-  // Call a set interval,
-  // to update timing every second
-  useEffect(() => {
+  const alarmTimesRef = useRef(null);
+
+  const startSound = () => {
+    const duration = updateTimeout.current - 5;
+    let counter = 0;
+    let alarmSound = null;
+    // Create array of times, first time
+    const createAlarms = () => {
+      console.log('we are creating the alarms');
+      const glitchArr = GlitchText.split('');
+      let timesArr = [];
+      for (let i = 0; i < 14; i++) {
+        let str = '';
+        for (let j = 0; j < 40; j++) {
+          str += `${glitchArr[Math.floor(Math.random() * glitchArr.length)]} `;
+        }
+        timesArr.push(str);
+      }
+      alarmTimesRef.current = timesArr;
+      setAlarm({
+        times: timesArr
+      });
+    }
     // Populate array of times
     const updateAlarms = () => {
+      console.log('we are updating the alarms');
+      const glitchArr = GlitchText.split('');
+      console.log('what is our alarm times...', alarm.times);
+      let timesArr = alarmTimesRef.current.slice(1, alarmTimesRef.current.length);
+      let str = '';
+      for (let j = 0; j < 40; j++) {
+        str += `${glitchArr[Math.floor(Math.random() * glitchArr.length)]} `;
+      }
+      timesArr.push(str);
+      alarmTimesRef.current = timesArr;
       setAlarm({
-        times: [
-        moment().add(0, 'minute').format('h:mm'),
-        moment().add(1, 'minute').format('h:mm'),
-        moment().add(2, 'minute').format('h:mm'),
-        moment().add(3, 'minute').format('h:mm'),
-        moment().add(4, 'minute').format('h:mm'),
-        moment().add(5, 'minute').format('h:mm'),
-        moment().add(6, 'minute').format('h:mm'),
-        moment().add(7, 'minute').format('h:mm'),
-        moment().add(8, 'minute').format('h:mm'),
-        moment().add(9, 'minute').format('h:mm'),
-        moment().add(10, 'minute').format('h:mm'),
-        moment().add(11, 'minute').format('h:mm'),
-        moment().add(12, 'minute').format('h:mm')
-      ]});
+        times: timesArr
+      });
     }
     setInterval(() => {
+      if (globalCounter.current === 0) {
+        if (counter === 0) {
+          createAlarms();
+        } else {
+          updateAlarms();
+        }
+        alarmSound = new Sound(duration, counter);
+        counter++;
+      } else if (globalCounter.current === duration) {
+        console.log('we are at the duration and we are killing the alarm');
+        alarmSound.stop();
+        alarmSound = null;
+        counter++;
+      }
+      globalCounter.current = (globalCounter.current + 1) % updateTimeout.current;
+    }, 1000);
+  }
+
+  /**
+   * Instantiation...
+   * Update alarms and set interval to continuously update.
+   * Instantiate sounds
+   */
+  useEffect(() => {
+    setInterval(() => {
       // Set the current time, at top of screen
-      setCurrentTime(moment().format('h:mm:ss a'));
-      setCurrentSecond(moment().format('ss'));
-      updateAlarms();
+      setCurrentTime('blah');
+      setCurrentSecond(globalCounter.current);
     }, 1000);
   }, []);
   return (
@@ -44,11 +90,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="flex justify-center">
-        <h5 className="ma0 pv2">{currentTime}</h5>
+        <h5 className="ma0 pv2" onClick={startSound}>ṕ̷̦̼̹̜̫̲̼̰̘͙̻̳͗͐̐̌̾̾͐̚̕͜͜͜͠o̴̻͖͐͒̍́͋͋̎̊̏͝͝s̸͎̩͓͈̿̾̎̒̓̉̆̿͝͝i̵̧̥̞̝͉̻̥̗͚̪̾̓̑̽͋̂̽̔̀̿͝t̶̨̢̡͖̮̭̫̙̗̮̪͙̮̺̿͆́̄̓͊͂̅͑̽͒̉͜͝i̸̛̜͎̋͋͛̾̒͗͆͘͝͝͝ơ̷̪̾͑̏̿̄̽̎̈̌̏̽̚̚ņ̴̧̦͚͚̰̗̪̞̀̌̊̄͌̎͒͐̉͑̓͘ ̴̖̟̼̣̝̐͝ͅt̴̰̙͚͉̤̞̭͇̙͍̼̹̂̇͗̉̽͛̚͜ḥ̶̠̙̆̈́͐̉̅̅ã̷̧̢̨̹̲̤͇͕͙̖̬̃̈́̋̀̾̓̏̎̇̌</h5>
       </header>
       <main>
-        <Alarms second={currentSecond} alarm={alarm} />
-        {/*<Sound />*/}
+        <Alarms second={currentSecond} alarm={alarm} duration={updateTimeout.current - 5} />
       </main>
     </div>
   )
