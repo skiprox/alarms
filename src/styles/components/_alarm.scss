@@ -9,8 +9,8 @@
     position: relative;
     appearance: none; outline: none;
     width: 50px; height: 30px;
-    background-color: #ffffff; border: 1px solid #D9DADC;
-    border-radius: 50px; box-shadow: inset -20px 0 0 0 #ffffff;
+    background-color: color('white'); border: 1px solid color('gray');
+    border-radius: 50px; box-shadow: inset -20px 0 0 0 color('white');
     transition-duration: 50ms;
     &:after {
       content: "";
@@ -21,8 +21,8 @@
       border-radius: 50%; box-shadow: 2px 4px 6px rgba(0,0,0,0.2);
     }
     &.on {
-      border-color: #4ED164;
-      box-shadow: inset 20px 0 0 0 #4ED164;
+      border-color: color('green');
+      box-shadow: inset 20px 0 0 0 color('green');
       &:after {
         left: 20px;
         box-shadow: -2px 4px 3px rgba(0,0,0,0.05);
@@ -33,12 +33,12 @@
 
 @keyframes bgChange {
   0% {
-    background-color: #181818;
+    background-color: color('black');
   }
   50% {
-    background: #1D1D1D;
+    background: color('black2');
   }
   100% {
-    background: #181818;
+    background: color('black');
   }
 }
