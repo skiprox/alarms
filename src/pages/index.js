@@ -67,21 +67,9 @@ export default function Home() {
         alarmSound = null;
         counter++;
       }
-    }, 1000);
-  }
-
-  /**
-   * Instantiation...
-   * Update alarms and set interval to continuously update.
-   * Instantiate sounds
-   */
-  useEffect(() => {
-    setInterval(() => {
-      // Set the current time, at top of screen
-      setCurrentTime('blah');
       setCurrentSecond(globalCounter.current);
     }, 1000);
-  }, []);
+  }
   return (
     <div className="container">
       <Head>
