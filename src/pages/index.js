@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import * as Tone from 'tone';
 import moment from 'moment';
 import Head from 'next/head';
 import Alarms from 'components/Alarms';
@@ -16,6 +17,7 @@ export default function Home() {
   const alarmTimesRef = useRef(null);
 
   const startSound = () => {
+    Tone.start();
     const duration = updateTimeout.current - 5;
     let counter = 0;
     let alarmSound = null;
