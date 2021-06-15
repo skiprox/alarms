@@ -62,7 +62,6 @@ export default function Home() {
           updateAlarms();
         }
         alarmSound = new Sound(duration, counter);
-        counter++;
       } else if (globalCounter.current === duration) {
         console.log('we are at the duration and we are killing the alarm');
         alarmSound.stop();

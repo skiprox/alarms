@@ -15,6 +15,7 @@ export default class Sound {
     // create two monophonic synths
     this.createBassSynth();
     this.createLeadSynth();
+    console.log('whats the notes counter', this.notesCounter);
     //play a note every quarter-note
     const loopA = new Tone.Loop(time => {
       this.synthA.triggerAttackRelease(FMNotes[this.notesCounter & FMNotes.length], "8n", time);
@@ -22,7 +23,6 @@ export default class Sound {
     //play another note every off quarter-note, by starting it "8n"
     const loopB = new Tone.Loop(time => {
       this.localCounter++;
-      console.log(time, this.localCounter);
       if (this.localCounter > 80) {
         this.synthB.envelope.release += 0.5;
         this.synthB.volume.value += 0.1;
