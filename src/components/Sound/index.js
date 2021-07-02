@@ -1,4 +1,4 @@
-import * as Tone from 'tone';
+import * as Tone from "tone";
 
 // Variables
 const AMNotes = ["C5", "D5", "B5", "G5"];
@@ -15,13 +15,17 @@ export default class Sound {
     // create two monophonic synths
     this.createBassSynth();
     this.createLeadSynth();
-    console.log('whats the notes counter', this.notesCounter);
+    console.log("whats the notes counter", this.notesCounter);
     //play a note every quarter-note
-    const loopA = new Tone.Loop(time => {
-      this.fmSynth.triggerAttackRelease(FMNotes[this.notesCounter & FMNotes.length], "8n", time);
+    const loopA = new Tone.Loop((time) => {
+      this.fmSynth.triggerAttackRelease(
+        FMNotes[this.notesCounter & FMNotes.length],
+        "8n",
+        time
+      );
     }, "4n").start(0);
     //play another note every off quarter-note, by starting it "8n"
-    const loopB = new Tone.Loop(time => {
+    const loopB = new Tone.Loop((time) => {
       this.localCounter++;
       console.log(time, this.localCounter);
       if (this.localCounter > 10) {
@@ -29,7 +33,11 @@ export default class Sound {
         this.amSynth.volume.value += 0.1;
         this.amSynth.oscillator.count += 1;
       }
-      this.amSynth.triggerAttackRelease(AMNotes[this.notesCounter % AMNotes.length], "8n", time);
+      this.amSynth.triggerAttackRelease(
+        AMNotes[this.notesCounter % AMNotes.length],
+        "8n",
+        time
+      );
     }, "4n").start("8n");
     Tone.Transport.bpm.value = 240;
     // the loops start when the Transport is started
@@ -46,7 +54,7 @@ export default class Sound {
     this.amSynth.envelope.release = 8.3;
   }
   stop() {
-    console.log('we call stop');
+    console.log("we call stop");
     Tone.Transport.stop();
     Tone.Transport.cancel();
   }
