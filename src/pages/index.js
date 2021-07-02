@@ -79,7 +79,7 @@ export default function Home() {
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </Head>
       <header className="flex justify-center">
-        <h5 className="ma0 pv2" onClick={startSound}>ṕ̷̦̼̹̜̫̲̼̰̘͙̻̳͗͐̐̌̾̾͐̚̕͜͜͜͠o̴̻͖͐͒̍́͋͋̎̊̏͝͝s̸͎̩͓͈̿̾̎̒̓̉̆̿͝͝i̵̧̥̞̝͉̻̥̗͚̪̾̓̑̽͋̂̽̔̀̿͝t̶̨̢̡͖̮̭̫̙̗̮̪͙̮̺̿͆́̄̓͊͂̅͑̽͒̉͜͝i̸̛̜͎̋͋͛̾̒͗͆͘͝͝͝ơ̷̪̾͑̏̿̄̽̎̈̌̏̽̚̚ņ̴̧̦͚͚̰̗̪̞̀̌̊̄͌̎͒͐̉͑̓͘ ̴̖̟̼̣̝̐͝ͅt̴̰̙͚͉̤̞̭͇̙͍̼̹̂̇͗̉̽͛̚͜ḥ̶̠̙̆̈́͐̉̅̅ã̷̧̢̨̹̲̤͇͕͙̖̬̃̈́̋̀̾̓̏̎̇̌</h5>
+        <h5 className="ma0 pv2 blur" onClick={startSound}>ṕ̷̦̼̹̜̫̲̼̰̘͙̻̳͗͐̐̌̾̾͐̚̕͜͜͜͠o̴̻͖͐͒̍́͋͋̎̊̏͝͝s̸͎̩͓͈̿̾̎̒̓̉̆̿͝͝i̵̧̥̞̝͉̻̥̗͚̪̾̓̑̽͋̂̽̔̀̿͝t̶̨̢̡͖̮̭̫̙̗̮̪͙̮̺̿͆́̄̓͊͂̅͑̽͒̉͜͝i̸̛̜͎̋͋͛̾̒͗͆͘͝͝͝ơ̷̪̾͑̏̿̄̽̎̈̌̏̽̚̚ņ̴̧̦͚͚̰̗̪̞̀̌̊̄͌̎͒͐̉͑̓͘ ̴̖̟̼̣̝̐͝ͅt̴̰̙͚͉̤̞̭͇̙͍̼̹̂̇͗̉̽͛̚͜ḥ̶̠̙̆̈́͐̉̅̅ã̷̧̢̨̹̲̤͇͕͙̖̬̃̈́̋̀̾̓̏̎̇̌</h5>
       </header>
       <main>
         <Alarms second={currentSecond} alarm={alarm} duration={updateTimeout.current - 5} />

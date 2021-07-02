@@ -11,8 +11,8 @@ export default function Alarms(props) {
           })}
           key={index}>
             <div className="w-75 flex flex-column pl2">
-              <h1 className="mb0 pb0 alarm__time">{elem}</h1>
-              <h5 className="mt1">a̶̡̗̪͉̬̱͉͉̻̻͔̹͍͎̣̋͊̿͒̽̿̔́́̑̐i̷̬̙̝̟̍͑̿͆̿́͘̕͠m̷̺͎͔̖̰͈͍͖̌̍̿̀̄̏̎͒͑̐̃̔̉͠s̴̛͍̩͖͙̳̜̱̱̦̹͖̝̠̱̣͛͑͐͂̽͆̔͐͝,̴̨̨̝̱̹̪͍̝͍̓̽͂̿̊͝</h5>
+              <h1 className="mb0 pb0 alarm__time blur">{elem}</h1>
+              <h5 className="mt1 blur">a̶̡̗̪͉̬̱͉͉̻̻͔̹͍͎̣̋͊̿͒̽̿̔́́̑̐i̷̬̙̝̟̍͑̿͆̿́͘̕͠m̷̺͎͔̖̰͈͍͖̌̍̿̀̄̏̎͒͑̐̃̔̉͠s̴̛͍̩͖͙̳̜̱̱̦̹͖̝̠̱̣͛͑͐͂̽͆̔͐͝,̴̨̨̝̱̹̪͍̝͍̓̽͂̿̊͝</h5>
             </div>
             <div className="w-25 flex justify-center items-center">
               <input className={classnames('alarm__switch', {

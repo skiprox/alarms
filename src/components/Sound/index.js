@@ -18,29 +18,32 @@ export default class Sound {
     console.log('whats the notes counter', this.notesCounter);
     //play a note every quarter-note
     const loopA = new Tone.Loop(time => {
-      this.synthA.triggerAttackRelease(FMNotes[this.notesCounter & FMNotes.length], "8n", time);
+      this.fmSynth.triggerAttackRelease(FMNotes[this.notesCounter & FMNotes.length], "8n", time);
     }, "4n").start(0);
     //play another note every off quarter-note, by starting it "8n"
     const loopB = new Tone.Loop(time => {
       this.localCounter++;
-      if (this.localCounter > 80) {
-        this.synthB.envelope.release += 0.5;
-        this.synthB.volume.value += 0.1;
+      console.log(time, this.localCounter);
+      if (this.localCounter > 10) {
+        this.amSynth.envelope.release += 0.25;
+        this.amSynth.volume.value += 0.1;
+        this.amSynth.oscillator.count += 1;
       }
-      this.synthB.triggerAttackRelease(AMNotes[this.notesCounter % AMNotes.length], "8n", time);
+      this.amSynth.triggerAttackRelease(AMNotes[this.notesCounter % AMNotes.length], "8n", time);
     }, "4n").start("8n");
     Tone.Transport.bpm.value = 240;
     // the loops start when the Transport is started
     Tone.Transport.start();
   }
   createBassSynth() {
-    this.synthA = new Tone.FMSynth().toDestination();
-    this.synthA.oscillator.partialCount = 5;
+    this.fmSynth = new Tone.FMSynth().toDestination();
+    this.fmSynth.volume.value = -16;
+    this.fmSynth.oscillator.partialCount = 5;
   }
   createLeadSynth() {
-    this.synthB = new Tone.AMSynth().toDestination();
-    this.synthB.volume.value = 14;
-    this.synthB.envelope.release = 8.3;
+    this.amSynth = new Tone.AMSynth().toDestination();
+    this.amSynth.volume.value = 5;
+    this.amSynth.envelope.release = 8.3;
   }
   stop() {
     console.log('we call stop');
