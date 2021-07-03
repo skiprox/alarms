@@ -44,13 +44,13 @@ export default class Sound {
   }
   createBassSynth() {
     this.lowSynth = new Tone.FMSynth().toDestination();
-    this.lowSynth.volume.value = 2;
+    this.lowSynth.volume.value = 0;
     this.lowSynth.oscillator.partialCount = 5;
   }
   createLeadSynth() {
     this.highSynth = new Tone.FMSynth().toDestination();
     this.highSynth.volume.value = 5;
-    this.highSynth.modulationEnvelope.sustain = 0.1;
+    this.highSynth.modulationEnvelope.sustain = 0.5;
     this.highSynth.oscillator.partialCount = 2;
     this.highSynth.envelope.attack = 0.01;
   }
