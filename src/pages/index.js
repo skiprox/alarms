@@ -8,7 +8,7 @@ import GlitchText from 'helpers/glitch';
 
 export default function Home() {
   // Ref
-  const updateTimeout = useRef(30);
+  const updateTimeout = useRef(15);
   const globalCounter = useRef(-1);
   // State
   const [currentTime, setCurrentTime] = useState(moment().format('h:mm a'));
